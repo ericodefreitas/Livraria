@@ -7,5 +7,6 @@ namespace Livraria.ApplicationCore.Interfaces
 {
     public interface ILivroRepository: IRepository<Livro>
     {
+        IEnumerable<Livro> ObterTodosOrdenadosPorNome();
     }
 }

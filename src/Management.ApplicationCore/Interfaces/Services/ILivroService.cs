@@ -10,9 +10,11 @@ namespace Livraria.ApplicationCore.Interfaces
     {
         Livro Adicionar(Livro entity);
 
-        void Atualizar(Livro entity);
+        Livro Atualizar(Livro entity);
 
         IEnumerable<Livro> ObterTodos();
+
+        IEnumerable<Livro> ObterTodosOrdenadosPorNome();
 
         Livro ObterPorId(int id);
 

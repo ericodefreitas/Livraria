@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Livraria.ApplicationCore.Interfaces;
+using Livraria.ApplicationCore.Services;
 using Livraria.Infrastructure.Data;
+using Livraria.Infrastructure.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +28,9 @@ namespace Livraria.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ILivroService, LivroService>();
+            services.AddTransient<ILivroRepository, LivroRepository>();            
+
             services.AddMvc();
 
             services.AddDbContext<LivroContext>(options =>

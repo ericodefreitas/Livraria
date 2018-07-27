@@ -9,7 +9,7 @@ namespace Livraria.ApplicationCore.Interfaces
     {
         Tentity Adicionar(Tentity entity);
 
-        void Atualizar(Tentity entity);
+        Tentity Atualizar(Tentity entity);
 
         IEnumerable<Tentity> ObterTodos();
 

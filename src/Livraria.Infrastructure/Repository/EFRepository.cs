@@ -25,10 +25,11 @@ namespace Livraria.Infrastructure.Repository
             return entity;
         }
 
-        public virtual void Atualizar(TEntity entity)
+        public virtual TEntity Atualizar(TEntity entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
             _dbContext.SaveChanges();
+            return entity;
         }
 
         public IEnumerable<TEntity> Buscar(Expression<Func<TEntity, bool>> predicado)

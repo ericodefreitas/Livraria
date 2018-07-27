@@ -23,9 +23,9 @@ namespace Livraria.ApplicationCore.Services
             return _livroRepository.Adicionar(entity);
         }
 
-        public void Atualizar(Livro entity)
+        public Livro Atualizar(Livro entity)
         {
-            _livroRepository.Atualizar(entity);
+            return _livroRepository.Atualizar(entity);
         }
 
         public IEnumerable<Livro> Buscar(Expression<Func<Livro, bool>> predicado)
@@ -41,6 +41,11 @@ namespace Livraria.ApplicationCore.Services
         public IEnumerable<Livro> ObterTodos()
         {
             return _livroRepository.ObterTodos();
+        }
+
+        public IEnumerable<Livro> ObterTodosOrdenadosPorNome()
+        {
+            return _livroRepository.ObterTodosOrdenadosPorNome();
         }
 
         public void Remover(Livro entity)
