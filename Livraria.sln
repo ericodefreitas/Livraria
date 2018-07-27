@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livraria.ApplicationCore", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livraria.Infrastructure", "src\Livraria.Infrastructure\Livraria.Infrastructure.csproj", "{92A2504B-6186-407A-AC54-44B846C671EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livraria.WebAPI", "src\Livraria.WebAPI\Livraria.WebAPI.csproj", "{414EE663-7740-4EB5-A1E6-A0429140C1E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livraria.WebAPI", "src\Livraria.WebAPI\Livraria.WebAPI.csproj", "{414EE663-7740-4EB5-A1E6-A0429140C1E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
