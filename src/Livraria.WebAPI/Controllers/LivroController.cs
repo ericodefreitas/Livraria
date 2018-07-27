@@ -32,7 +32,7 @@ namespace Livraria.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/livroOrdenadosPorNome")]
+        [Route("OrdenarPorNome")]
         public IEnumerable<Livro> GetLivrosOrdenadosPorNome()
         {
             return _service.ObterTodosOrdenadosPorNome();
