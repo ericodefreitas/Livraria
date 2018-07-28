@@ -1,0 +1,105 @@
+﻿<html ng-app="livraria">
+<head>
+    <title>Lista de Livros</title>
+    <script src="js/angular.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+    <style>
+        .jumbotron {
+            width: 85%;
+            text-align: center;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        .form-control {
+            margin-bottom: 5px;
+        }
+
+        .selecionado {
+            background-color: yellow;
+        }
+
+        .negrito {
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        angular.module("livraria", []);
+        angular.module("livraria").controller("livrariaCtrl", function ($scope) {
+            $scope.app = "Lista de Livros";
+            $scope.livros = [
+                {}
+            ];
+            $scope.idiomas = [
+                { descricao: "Português", id: 14 },
+                { descricao: "Inglês", id: 15 },
+                { descricao: "Espanhol", id: 41 },
+                { descricao: "Alemão", id: 25 },
+                { descricao: "Francês", id: 21 }
+            ];
+            $scope.adicionarlivro = function (livro) {
+                $scope.livros.push(angular.copy(livro));
+                delete $scope.livro;
+            };
+            $scope.apagarlivros = function (livros) {
+                $scope.livros = livros.filter(function (livro) {
+                    if (!livro.selecionado) return livro;
+                });
+            };
+            $scope.islivroselecionado = function (livros) {
+                return livros.some(function (livro) {
+                    return livro.selecionado;
+                });
+            };
+        });
+    </script>
+</head>
+<body ng-controller="livrariaCtrl">
+    <div class="jumbotron">
+        <h3>{{app}}</h3>
+        <table ng-show="livros.length > 0" class="table">
+            <tr>
+                <th></th>
+                <th>Titulo</th>
+                <th>Subtitulo</th>
+                <th>Edicao</th>
+                <th>Ano</th>
+                <th>Paginas</th>
+                <th>Preco</th>
+                <th>Editora</th>
+                <th>Idioma</th>
+                <th></th>
+            </tr>
+            <tr ng-class="{'selecionado negrito': livro.selecionado}" ng-repeat="livro in livros">
+                <td><input type="checkbox" ng-model="livro.selecionado" /></td>
+                <td>{{livro.titulo}}</td>
+                <td>{{livro.subtitulo}}</td>
+                <td>{{livro.edicao}}</td>
+                <td>{{livro.ano}}</td>
+                <td>{{livro.paginas}}</td>
+                <td>{{livro.preco}}</td>
+                <td>{{livro.editora}}</td>
+                <td>{{livro.idioma.descricao}}</td>
+            </tr>
+        </table>
+        <hr />
+        <input class="form-control" type="text" ng-model="livro.titulo" placeholder="Título" />
+        <input class="form-control" type="text" ng-model="livro.subtitulo" placeholder="Subtítulo" />
+        <input class="form-control" type="text" ng-model="livro.edicao" placeholder="Edição" />
+        <input class="form-control" type="text" ng-model="livro.ano" placeholder="Ano de lançamento" />
+        <input class="form-control" type="text" ng-model="livro.paginas" placeholder="Quantidade de Páginas" />
+        <input class="form-control" type="text" ng-model="livro.preco" placeholder="Preço" />
+        <input class="form-control" type="text" ng-model="livro.editora" placeholder="Editora" />
+        <select class="form-control" ng-model="livro.idioma" ng-options="idioma.descricao for idioma in idiomas">
+            <option value="">Selecione um idioma</option>
+        </select>
+        <button class="btn btn-primary btn-block" ng-click="adicionarlivro(livro)" ng-disabled="!livro.titulo || !livro.ano">Adicionar livro</button>
+        <button class="btn btn-danger btn-block" ng-click="apagarlivros(livros)" ng-if="islivroselecionado(livros)">Apagar livros</button>
+    </div>
+</body>
+</html>

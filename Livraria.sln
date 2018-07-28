@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livraria.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livraria.WebAPI", "src\Livraria.WebAPI\Livraria.WebAPI.csproj", "{414EE663-7740-4EB5-A1E6-A0429140C1E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livraria.WebApp", "src\Livraria.WebApp\Livraria.WebApp.csproj", "{547BE0F4-85A8-4C57-B731-C12A40E79A17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{414EE663-7740-4EB5-A1E6-A0429140C1E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{414EE663-7740-4EB5-A1E6-A0429140C1E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{414EE663-7740-4EB5-A1E6-A0429140C1E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{547BE0F4-85A8-4C57-B731-C12A40E79A17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{547BE0F4-85A8-4C57-B731-C12A40E79A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{547BE0F4-85A8-4C57-B731-C12A40E79A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{547BE0F4-85A8-4C57-B731-C12A40E79A17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +47,7 @@ Global
 		{E868C67B-215B-43E3-B416-D609DF32E11B} = {F4090CB7-0C70-4027-8396-336B06968887}
 		{92A2504B-6186-407A-AC54-44B846C671EC} = {29B8A0F7-C33B-4693-B21D-E231DEB2F56C}
 		{414EE663-7740-4EB5-A1E6-A0429140C1E4} = {F9FF9EE0-5B63-4116-A4B4-5ACD927DFF30}
+		{547BE0F4-85A8-4C57-B731-C12A40E79A17} = {F9FF9EE0-5B63-4116-A4B4-5ACD927DFF30}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4950AEE1-1AB6-4341-905A-5B2F02C5A42A}
