@@ -13,9 +13,5 @@
         vm.title = 'index';
 
         activate();
-
-        function activate() {
-            alert("opa");
-        }
     }
 })();

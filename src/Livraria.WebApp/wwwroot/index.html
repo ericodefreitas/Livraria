@@ -30,18 +30,26 @@
     </style>
     <script>
         angular.module("livraria", []);
-        angular.module("livraria").controller("livrariaCtrl", function ($scope) {
+        angular.module("livraria").controller("livrariaCtrl", function ($scope, $http) {
             $scope.app = "Lista de Livros";
-            $scope.livros = [
-                {}
-            ];
+            $scope.livros = [];
             $scope.idiomas = [
-                { descricao: "Português", id: 14 },
-                { descricao: "Inglês", id: 15 },
-                { descricao: "Espanhol", id: 41 },
-                { descricao: "Alemão", id: 25 },
-                { descricao: "Francês", id: 21 }
+                { descricao: "Português", id: 0 },
+                { descricao: "Inglês", id: 1 },
+                { descricao: "Espanhol", id: 2 },
+                { descricao: "Alemão", id: 3 },
+                { descricao: "Francês", id: 4 }
             ];
+
+            var getLivros = function () {
+
+                $http.get("http://localhost:61394/api/livro").then(function (data, status) {
+                    $scope.livros = data.data;
+                });
+            }
+
+            
+
             $scope.adicionarlivro = function (livro) {
                 $scope.livros.push(angular.copy(livro));
                 delete $scope.livro;
@@ -56,6 +64,8 @@
                     return livro.selecionado;
                 });
             };
+
+            getLivros();
         });
     </script>
 </head>
