@@ -21,7 +21,5 @@ namespace Livraria.ApplicationCore.Entity
         public double Preco { get; set; }
 
         public string Editora { get; set; }
-
-        public byte Idioma { get; set; }
     }
 }

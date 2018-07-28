@@ -18,7 +18,6 @@ namespace Livraria.Infrastructure.Migrations
                     Ano = table.Column<int>(nullable: false),
                     Edicao = table.Column<string>(nullable: true),
                     Editora = table.Column<string>(nullable: true),
-                    Idioma = table.Column<byte>(nullable: false),
                     Paginas = table.Column<int>(nullable: false),
                     Preco = table.Column<double>(nullable: false),
                     Subtitulo = table.Column<string>(nullable: true),

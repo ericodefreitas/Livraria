@@ -1,13 +1,17 @@
 ﻿<html ng-app="livraria">
 <head>
+    <meta charset="utf-8" />
     <title>Lista de Livros</title>
+
     <script src="js/angular.js"></script>
     <script src="app/app.js"></script>
     <script src="app/controllers/livrariaCtrl.js"></script>
     <script src="app/services/livrariaAPIService.js"></script>
     <script src="app/config/config.js"></script>
+
     <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
     <link href="lib/app.css" rel="stylesheet" />
+
 </head>
 <body ng-controller="livrariaCtrl">
     <div class="jumbotron">
@@ -21,8 +25,7 @@
                 <th>Paginas</th>
                 <th>Preço</th>
                 <th>Editora</th>
-                <th>Idioma</th>
-                <th></th>
+                <th>Ações</th>
             </tr>
             <tr ng-repeat="livro in livros">
                 <td ng-show="false">{{livro.id}}</td>
@@ -33,25 +36,56 @@
                 <td>{{livro.paginas}}</td>
                 <td>{{livro.preco}}</td>
                 <td>{{livro.editora}}</td>
-                <td>{{livro.idioma}}</td>
-                <td><button class="btn btn-warning btn-block" ng-click="alterarLivro(livro.id)">Editar</button></td>
-                <td><button class="btn btn-danger btn-block" ng-click="apagarlivro(livro.id)">Excluir</button></td>
+                <td>
+                    <button class="btn btn-warning btn-block" ng-click="alterarLivro(livro.id)">Editar</button>
+                    <button class="btn btn-danger btn-block" ng-click="apagarlivro(livro.id)">Excluir</button>
+                </td>
             </tr>
         </table>
         <hr />
-        <form>
-            <input class="form-control" type="text" ng-model="livro.titulo" placeholder="Título" />
-            <input class="form-control" type="text" ng-model="livro.subtitulo" placeholder="Subtítulo" />
-            <input class="form-control" type="text" ng-model="livro.edicao" placeholder="Edição" />
-            <input class="form-control" type="text" ng-model="livro.ano" placeholder="Ano de lançamento" ui-number-mask />
-            <input class="form-control" type="text" ng-model="livro.paginas" placeholder="Quantidade de Páginas" ui-number-mask />
-            <input class="form-control" type="text" ng-model="livro.preco" placeholder="Preço" />
-            <input class="form-control" type="text" ng-model="livro.editora" placeholder="Editora" />
-            <select class="form-control" ng-model="livro.idioma" ng-change="onChangeIdioma()" ng-options="idioma.descricao for idioma in idiomas">
-                <option value="">Selecione um idioma</option>
-            </select>
-            <button class="btn btn-primary btn-block col-sm-3" ng-click="adicionarlivro(livro)" ng-disabled="!livro.titulo || !livro.ano">Salvar livro</button>
+        <form name="livroForm">
+            <div class="text-left">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="titulo">Título*</label>
+                        <input name="titulo" class="form-control" type="text" ng-model="livro.titulo" ng-required="true" placeholder="Título" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="subtitulo">Subtítulo</label>
+                        <input name="subtitulo" class="form-control" type="text" ng-model="livro.subtitulo" placeholder="Subtítulo" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label for="edicao">Edição</label>
+                        <input name="edicao" class="form-control" type="text" ng-model="livro.edicao" placeholder="Edição" />
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label for="ano">Ano de lançamento*</label>
+                        <input name="ano" class="form-control" type="number" ng-model="livro.ano" ng-required="true" placeholder="Ano de lançamento" />
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label for="paginas">Páginas*</label>
+                        <input name="paginas" class="form-control" type="number" ng-model="livro.paginas" ng-required="true" placeholder="Qtde. de Páginas" />
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label for="preco">Preço*</label>
+                        <input name="preco" class="form-control" type="number" ng-model="livro.preco" ng-required="true" placeholder="Preço" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="editora">Editora*</label>
+                        <input name="editora" class="form-control" type="text" ng-model="livro.editora" ng-required="true" placeholder="Editora" />
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-block" ng-disabled="!livro" ng-click="adicionarlivro(livro)" >Salvar livro</button>
         </form>
+        <div ng-show="livroForm.$invalid && livroForm.$dirty && livro" class="alert alert-danger">
+            Os campos marcados com * são obrigatórios.
+        </div>
     </div>
 </body>
 </html>

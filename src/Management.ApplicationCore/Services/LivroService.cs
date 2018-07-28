@@ -48,9 +48,9 @@ namespace Livraria.ApplicationCore.Services
             return _livroRepository.ObterTodosOrdenadosPorNome();
         }
 
-        public void Remover(Livro entity)
+        public void Remover(int id)
         {
-            _livroRepository.Remover(entity);
+            _livroRepository.Remover(ObterPorId(id));
         }
 
         #endregion

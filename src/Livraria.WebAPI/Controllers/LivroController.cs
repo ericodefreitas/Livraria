@@ -104,22 +104,9 @@ namespace Livraria.WebAPI.Controllers
 
         // DELETE: api/Livro/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLivro([FromRoute] int id)
+        public void DeleteLivro([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var livro = _service.ObterPorId(id);
-            if (livro == null)
-            {
-                return NotFound();
-            }
-
-            _service.Remover(livro);
-
-            return Ok(livro);
+            _service.Remover(id);
         }
 
         #endregion

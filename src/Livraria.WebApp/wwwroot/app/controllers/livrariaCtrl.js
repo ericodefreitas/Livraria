@@ -1,21 +1,14 @@
 ﻿
-angular.module("livraria").controller("livrariaCtrl", function ($scope, livrariaAPI) {
+angular.module("livraria").controller("livrariaCtrl", function ($scope, $filter, livrariaAPI) {
     $scope.app = "Lista de Livros";
     $scope.livros = [];
-    $scope.idiomas = [
-        { descricao: "Português", id: 0 },
-        { descricao: "Inglês", id: 1 },
-        { descricao: "Espanhol", id: 2 },
-        { descricao: "Alemão", id: 3 },
-        { descricao: "Francês", id: 4 }
-    ];
 
     var getLivros = function () {
 
         livrariaAPI.getLivros().then(function (data, status) {
             $scope.livros = data.data;
         });
-    }
+    };
 
     var getLivro = function (id) {
 
@@ -23,36 +16,43 @@ angular.module("livraria").controller("livrariaCtrl", function ($scope, livraria
 
             $scope.livro = data.data;
         });
-    }
+    };
 
     var postLivro = function (data) {
 
         livrariaAPI.postLivro(data).then(function () {
             getLivros();
         });
-    }
+    };
 
     var putLivro = function (id, data) {
 
         livrariaAPI.putLivro(id, data).then(function (data) {
             getLivros();
         });
-    }
+    };
 
     var deleteLivro = function (id) {
+
+        if ($scope.livro && $scope.livro.id == id)
+            delete $scope.livro;
 
         livrariaAPI.deleteLivro(id).then(function (data) {
             getLivros();
         });
-    }
+    };
 
     $scope.alterarLivro = function (id) {
         getLivro(id);
     };
 
-    $scope.adicionarlivro = function (livro) {
+    $scope.apagarContatos = function (contatos) {
+        $scope.contatos = contatos.filter(function (contato) {
+            if (!contato.selecionado) return contato;
+        });
+    };
 
-        $scope.livro.idioma = $scope.livro.idioma.id;
+    $scope.adicionarlivro = function (livro) {
 
         if (!$scope.livro.id)
             postLivro($scope.livro);

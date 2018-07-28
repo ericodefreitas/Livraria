@@ -20,6 +20,6 @@ namespace Livraria.ApplicationCore.Interfaces
 
         IEnumerable<Livro> Buscar(Expression<Func<Livro, bool>> predicado);
 
-        void Remover(Livro entity);
+        void Remover(int id);
     }
 }

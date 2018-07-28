@@ -31,8 +31,6 @@ namespace Livraria.Infrastructure.Migrations
 
                     b.Property<string>("Editora");
 
-                    b.Property<byte>("Idioma");
-
                     b.Property<int>("Paginas");
 
                     b.Property<double>("Preco");

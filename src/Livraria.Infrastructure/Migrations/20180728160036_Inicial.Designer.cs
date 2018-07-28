@@ -11,7 +11,7 @@ using System;
 namespace Livraria.Infrastructure.Migrations
 {
     [DbContext(typeof(LivroContext))]
-    [Migration("20180728031427_Inicial")]
+    [Migration("20180728160036_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,8 +31,6 @@ namespace Livraria.Infrastructure.Migrations
                     b.Property<string>("Edicao");
 
                     b.Property<string>("Editora");
-
-                    b.Property<byte>("Idioma");
 
                     b.Property<int>("Paginas");
 
