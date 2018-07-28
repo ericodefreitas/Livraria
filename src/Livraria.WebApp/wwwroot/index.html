@@ -2,100 +2,12 @@
 <head>
     <title>Lista de Livros</title>
     <script src="js/angular.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/controllers/livrariaCtrl.js"></script>
+    <script src="app/services/livrariaAPIService.js"></script>
+    <script src="app/config/config.js"></script>
     <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
-    <style>
-        .jumbotron {
-            width: 85%;
-            text-align: center;
-            margin-top: 20px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .table {
-            margin-top: 20px;
-        }
-
-        .form-control {
-            margin-bottom: 5px;
-        }
-
-        .negrito {
-            font-weight: bold;
-        }
-    </style>
-    <script>
-        angular.module("livraria", []);
-        angular.module("livraria").controller("livrariaCtrl", function ($scope, $http) {
-            $scope.app = "Lista de Livros";
-            $scope.livros = [];
-            $scope.idiomas = [
-                { descricao: "Português", id: 0 },
-                { descricao: "Inglês", id: 1 },
-                { descricao: "Espanhol", id: 2 },
-                { descricao: "Alemão", id: 3 },
-                { descricao: "Francês", id: 4 }
-            ];
-
-            var getLivros = function () {
-
-                $http.get("http://localhost:61394/api/livro/OrdenarPorNome").then(function (data, status) {
-                    $scope.livros = data.data;
-                });
-            }
-
-            var getLivro = function (id) {
-                
-                $http.get("http://localhost:61394/api/livro/" + id).then(function (data) {
-
-                    $scope.livro = data.data;
-                });
-            }
-
-            var postLivro = function (data) {
-                
-                $http.post("http://localhost:61394/api/livro/", data).then(function () {
-                    getLivros();
-                });
-            }
-
-            var putLivro = function (id, data) {
-                
-                $http.put("http://localhost:61394/api/livro/" + id, data).then(function (data) {
-                    getLivros();
-                });
-            }
-
-            var deleteLivro = function (id) {
-
-                $http.delete("http://localhost:61394/api/livro/" + id).then(function (data) {
-                    getLivros();
-                });
-            }
-
-            $scope.alterarLivro = function (id) {
-                getLivro(id);
-            };
-
-            $scope.adicionarlivro = function (livro) {
-
-                $scope.livro.idioma = $scope.livro.idioma.id;
-
-                if (!$scope.livro.id)
-                    postLivro($scope.livro);
-                else
-                    putLivro($scope.livro.id, $scope.livro);
-
-                delete $scope.livro;
-            };
-
-            $scope.apagarlivro = function (id) {
-                deleteLivro(id);
-            };
-
-            getLivros();
-        });
-    </script>
+    <link href="lib/app.css" rel="stylesheet" />
 </head>
 <body ng-controller="livrariaCtrl">
     <div class="jumbotron">
@@ -131,8 +43,8 @@
             <input class="form-control" type="text" ng-model="livro.titulo" placeholder="Título" />
             <input class="form-control" type="text" ng-model="livro.subtitulo" placeholder="Subtítulo" />
             <input class="form-control" type="text" ng-model="livro.edicao" placeholder="Edição" />
-            <input class="form-control" type="text" ng-model="livro.ano" placeholder="Ano de lançamento" />
-            <input class="form-control" type="text" ng-model="livro.paginas" placeholder="Quantidade de Páginas" />
+            <input class="form-control" type="text" ng-model="livro.ano" placeholder="Ano de lançamento" ui-number-mask />
+            <input class="form-control" type="text" ng-model="livro.paginas" placeholder="Quantidade de Páginas" ui-number-mask />
             <input class="form-control" type="text" ng-model="livro.preco" placeholder="Preço" />
             <input class="form-control" type="text" ng-model="livro.editora" placeholder="Editora" />
             <select class="form-control" ng-model="livro.idioma" ng-change="onChangeIdioma()" ng-options="idioma.descricao for idioma in idiomas">
