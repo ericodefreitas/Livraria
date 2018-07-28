@@ -12,7 +12,7 @@ namespace Livraria.ApplicationCore.Entity
 
         public string Subtitulo { get; set; }
 
-        public byte Edicao { get; set; }
+        public string Edicao { get; set; }
 
         public int Ano { get; set; }
 

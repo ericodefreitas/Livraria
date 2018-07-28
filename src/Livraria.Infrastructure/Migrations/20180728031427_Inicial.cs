@@ -16,7 +16,7 @@ namespace Livraria.Infrastructure.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Ano = table.Column<int>(nullable: false),
-                    Edicao = table.Column<byte>(nullable: false),
+                    Edicao = table.Column<string>(nullable: true),
                     Editora = table.Column<string>(nullable: true),
                     Idioma = table.Column<byte>(nullable: false),
                     Paginas = table.Column<int>(nullable: false),

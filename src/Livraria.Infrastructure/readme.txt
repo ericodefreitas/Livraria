@@ -1,6 +1,6 @@
-Rodar o comando:
+Rodar o comando no Console:
 
-"Update-Database -Context LivroContext"
+"Update-Database Inicial -Context LivroContext"
 
 Projeto:
 

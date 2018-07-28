@@ -27,7 +27,7 @@ namespace Livraria.Infrastructure.Migrations
 
                     b.Property<int>("Ano");
 
-                    b.Property<byte>("Edicao");
+                    b.Property<string>("Edicao");
 
                     b.Property<string>("Editora");
 

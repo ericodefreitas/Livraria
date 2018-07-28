@@ -20,10 +20,6 @@
             margin-bottom: 5px;
         }
 
-        .selecionado {
-            background-color: yellow;
-        }
-
         .negrito {
             font-weight: bold;
         }
@@ -43,26 +39,58 @@
 
             var getLivros = function () {
 
-                $http.get("http://localhost:61394/api/livro").then(function (data, status) {
+                $http.get("http://localhost:61394/api/livro/OrdenarPorNome").then(function (data, status) {
                     $scope.livros = data.data;
                 });
             }
 
-            
+            var getLivro = function (id) {
+                
+                $http.get("http://localhost:61394/api/livro/" + id).then(function (data) {
+
+                    $scope.livro = data.data;
+                });
+            }
+
+            var postLivro = function (data) {
+                
+                $http.post("http://localhost:61394/api/livro/", data).then(function () {
+                    getLivros();
+                });
+            }
+
+            var putLivro = function (id, data) {
+                
+                $http.put("http://localhost:61394/api/livro/" + id, data).then(function (data) {
+                    getLivros();
+                });
+            }
+
+            var deleteLivro = function (id) {
+
+                $http.delete("http://localhost:61394/api/livro/" + id).then(function (data) {
+                    getLivros();
+                });
+            }
+
+            $scope.alterarLivro = function (id) {
+                getLivro(id);
+            };
 
             $scope.adicionarlivro = function (livro) {
-                $scope.livros.push(angular.copy(livro));
+
+                $scope.livro.idioma = $scope.livro.idioma.id;
+
+                if (!$scope.livro.id)
+                    postLivro($scope.livro);
+                else
+                    putLivro($scope.livro.id, $scope.livro);
+
                 delete $scope.livro;
             };
-            $scope.apagarlivros = function (livros) {
-                $scope.livros = livros.filter(function (livro) {
-                    if (!livro.selecionado) return livro;
-                });
-            };
-            $scope.islivroselecionado = function (livros) {
-                return livros.some(function (livro) {
-                    return livro.selecionado;
-                });
+
+            $scope.apagarlivro = function (id) {
+                deleteLivro(id);
             };
 
             getLivros();
@@ -74,19 +102,18 @@
         <h3>{{app}}</h3>
         <table ng-show="livros.length > 0" class="table">
             <tr>
-                <th></th>
                 <th>Titulo</th>
                 <th>Subtitulo</th>
                 <th>Edicao</th>
                 <th>Ano</th>
                 <th>Paginas</th>
-                <th>Preco</th>
+                <th>Preço</th>
                 <th>Editora</th>
                 <th>Idioma</th>
                 <th></th>
             </tr>
-            <tr ng-class="{'selecionado negrito': livro.selecionado}" ng-repeat="livro in livros">
-                <td><input type="checkbox" ng-model="livro.selecionado" /></td>
+            <tr ng-repeat="livro in livros">
+                <td ng-show="false">{{livro.id}}</td>
                 <td>{{livro.titulo}}</td>
                 <td>{{livro.subtitulo}}</td>
                 <td>{{livro.edicao}}</td>
@@ -94,22 +121,25 @@
                 <td>{{livro.paginas}}</td>
                 <td>{{livro.preco}}</td>
                 <td>{{livro.editora}}</td>
-                <td>{{livro.idioma.descricao}}</td>
+                <td>{{livro.idioma}}</td>
+                <td><button class="btn btn-warning btn-block" ng-click="alterarLivro(livro.id)">Editar</button></td>
+                <td><button class="btn btn-danger btn-block" ng-click="apagarlivro(livro.id)">Excluir</button></td>
             </tr>
         </table>
         <hr />
-        <input class="form-control" type="text" ng-model="livro.titulo" placeholder="Título" />
-        <input class="form-control" type="text" ng-model="livro.subtitulo" placeholder="Subtítulo" />
-        <input class="form-control" type="text" ng-model="livro.edicao" placeholder="Edição" />
-        <input class="form-control" type="text" ng-model="livro.ano" placeholder="Ano de lançamento" />
-        <input class="form-control" type="text" ng-model="livro.paginas" placeholder="Quantidade de Páginas" />
-        <input class="form-control" type="text" ng-model="livro.preco" placeholder="Preço" />
-        <input class="form-control" type="text" ng-model="livro.editora" placeholder="Editora" />
-        <select class="form-control" ng-model="livro.idioma" ng-options="idioma.descricao for idioma in idiomas">
-            <option value="">Selecione um idioma</option>
-        </select>
-        <button class="btn btn-primary btn-block" ng-click="adicionarlivro(livro)" ng-disabled="!livro.titulo || !livro.ano">Adicionar livro</button>
-        <button class="btn btn-danger btn-block" ng-click="apagarlivros(livros)" ng-if="islivroselecionado(livros)">Apagar livros</button>
+        <form>
+            <input class="form-control" type="text" ng-model="livro.titulo" placeholder="Título" />
+            <input class="form-control" type="text" ng-model="livro.subtitulo" placeholder="Subtítulo" />
+            <input class="form-control" type="text" ng-model="livro.edicao" placeholder="Edição" />
+            <input class="form-control" type="text" ng-model="livro.ano" placeholder="Ano de lançamento" />
+            <input class="form-control" type="text" ng-model="livro.paginas" placeholder="Quantidade de Páginas" />
+            <input class="form-control" type="text" ng-model="livro.preco" placeholder="Preço" />
+            <input class="form-control" type="text" ng-model="livro.editora" placeholder="Editora" />
+            <select class="form-control" ng-model="livro.idioma" ng-change="onChangeIdioma()" ng-options="idioma.descricao for idioma in idiomas">
+                <option value="">Selecione um idioma</option>
+            </select>
+            <button class="btn btn-primary btn-block col-sm-3" ng-click="adicionarlivro(livro)" ng-disabled="!livro.titulo || !livro.ano">Salvar livro</button>
+        </form>
     </div>
 </body>
 </html>
